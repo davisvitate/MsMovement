@@ -7,12 +7,21 @@ import com.microservice.Movement.model.Movement;
 
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 
 
 public interface MoveRepository extends ReactiveMongoRepository<Movement, String> {
 	
-	@Query("{ 'clientperson.dni': ?0 }")
+	@Query("{ 'client.dni': ?0 }")
     Flux<Movement> findByDni(final String dni);
+	
+	
+	
+	@Query("{ '_id': ?0 }")
+    Mono<Movement> findById(final String id);
+	
+	@Query("{ 'description': ?0 }")
+    Flux<Movement> findDescription(final String description);
 
 }

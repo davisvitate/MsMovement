@@ -2,6 +2,8 @@ package com.microservice.Movement.services;
 
 
 
+
+
 import org.springframework.stereotype.Service;
 
 import com.microservice.Movement.model.Movement;
@@ -20,6 +22,14 @@ public interface MovementServices {
 	public Mono<Movement> saveMove(Movement move);
 
 	public Mono<Void> deleteMove(Movement move);
+	
+	public Flux<Movement> findByDni(String dni);
+	
+	
+	public Mono<Movement> findByID(String id);
+	
+	public Flux<Movement> findDesc(String description);
+	
 	
 	
 

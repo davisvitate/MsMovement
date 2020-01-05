@@ -1,59 +1,42 @@
 package com.microservice.Movement.controller;
 
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
-
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
-
-
 import com.microservice.Movement.model.Movement;
 import com.microservice.Movement.services.MovementServices;
-
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-
-
 @RestController
 @RequestMapping("/movement")
 public class MovementController {
-	
-	
-	
+
 	@Autowired
 	private MovementServices service;
-	
+
 	@GetMapping
-	public Mono<ResponseEntity<Flux<Movement>>> lista(){
-		return Mono.just(
-				ResponseEntity.ok()
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
-				.body(service.findAllMove())
-				);
+	public Mono<ResponseEntity<Flux<Movement>>> lista() {
+		return Mono.just(ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(service.findAllMove()));
 	}
-	
+
 	@PostMapping("/createM")
-	public Mono<Movement> createMove(@RequestBody Movement monoMovement){
+	public Mono<Movement> createMove(@RequestBody Movement monoMovement) {
 		return service.saveMove(monoMovement);
 	}
-	
+
 //	@PostMapping("/createM")
 //	public Mono<ResponseEntity<Map<String, Object>>> createMove(@Valid @RequestBody Mono<Movement> monoMovement){
 //		
@@ -87,7 +70,21 @@ public class MovementController {
 //
 //	}
 	
+	@GetMapping("/dni/{dni}")
+	public Flux<Movement> findClientByDni(@PathVariable String dni) {
+		return service.findByDni(dni);
+	}
 	
 	
+	
+	@GetMapping("/id/{id}")
+	public Mono<Movement> findByIdMove(@PathVariable String id) {
+		return service.findByID(id);
+	}
+	
+	@GetMapping("/desc/{description}")
+	public Flux<Movement> findDesRD(@PathVariable String description) {
+		return service.findDesc(description);
+	}
 
 }
