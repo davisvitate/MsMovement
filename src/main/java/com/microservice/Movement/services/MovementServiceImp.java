@@ -1,11 +1,14 @@
 package com.microservice.Movement.services;
 
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import java.text.ParseException;
 import org.springframework.stereotype.Service;
+
 
 import com.microservice.Movement.model.Movement;
 import com.microservice.Movement.repository.MoveRepository;
@@ -61,7 +64,29 @@ public class MovementServiceImp implements MovementServices {
 		return moverepo.findDescription(description);
 	}
 	
-	
+
+
+//	@Override
+//	public Flux<Movement> getRangeMovement(String num_count, String from, String to) {
+//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//		try {
+//
+//			Date first = df.parse(from);
+//			Date last = df.parse(to);
+//			System.out.println(first.toString() + " " + last);
+//
+//			// return repoMov.findAllDateRangeByNro_cuenta(nro_cuenta, first, last);
+//			return moverepo.findByFechaBetween(first, last).filter(moves -> moves.getNum_count().equals(num_count));
+//
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			// e.printStackTrace();
+//			return null;
+//		}
+//		return null;
+		
+//	}
+
 	
 	
 

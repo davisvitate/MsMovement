@@ -2,6 +2,8 @@ package com.microservice.Movement.controller;
 
 
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.MediaType;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microservice.Movement.model.Movement;
+import com.microservice.Movement.services.MovementServiceImp;
 import com.microservice.Movement.services.MovementServices;
 
 import reactor.core.publisher.Flux;
@@ -26,6 +29,8 @@ public class MovementController {
 
 	@Autowired
 	private MovementServices service;
+	
+	private  MovementServiceImp s;
 
 	@GetMapping
 	public Mono<ResponseEntity<Flux<Movement>>> lista() {
@@ -75,8 +80,11 @@ public class MovementController {
 		return service.findByDni(dni);
 	}
 	
-	
-	
+//	@GetMapping("/getRangeMovement/{num_count}/{from}/{to}")
+//	public Flux<Movement> getRangeMovimientos(@PathVariable("num_count") String num_count,@PathVariable("from") String from,@PathVariable("to") String to) {
+//		
+//		return service.getRangeMovement(num_count, from, to);
+//	}
 	@GetMapping("/id/{id}")
 	public Mono<Movement> findByIdMove(@PathVariable String id) {
 		return service.findByID(id);
@@ -86,5 +94,7 @@ public class MovementController {
 	public Flux<Movement> findDesRD(@PathVariable String description) {
 		return service.findDesc(description);
 	}
+	
+	
 
 }
